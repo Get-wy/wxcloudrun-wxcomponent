@@ -13,7 +13,6 @@ import (
 )
 
 type Option func(*gin.RouterGroup)
-
 var options []Option
 
 // Include 注册app的路由配置
