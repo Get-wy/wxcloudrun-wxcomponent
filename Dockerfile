@@ -19,12 +19,12 @@ COPY . /wxcloudrun-wxcomponent/
 RUN GOPROXY="https://goproxy.cn" GO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main .
 
 # FROM ccr.ccs.tencentyun.com/weixincloud/weixincloud_wxcomponent:latest as wxcomponent
-FROM registry.cn-hangzhou.aliyuncs.com/pp_ai/node_app:0.1_beta as wxcomponent
+# FROM registry.cn-hangzhou.aliyuncs.com/pp_ai/node_app:0.1_beta as wxcomponent
 # 选用运行时所用基础镜像（GO语言选择原则：尽量体积小、包含基础linux内容的基础镜像）
 FROM alpine:3.13
 
-COPY --from=wxcomponent /wxcloudrun-wxcomponent /wxcloudrun-wxcomponent
-ENV GIN_MODE release
+# COPY --from=wxcomponent /wxcloudrun-wxcomponent /wxcloudrun-wxcomponent
+# ENV GIN_MODE release
 # COPY --from=wxcomponent /wxcloudrun-wxcomponent /wxcloudrun-wxcomponent
 # ENV GIN_MODE release
 
