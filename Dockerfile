@@ -52,6 +52,6 @@ RUN apk add ca-certificates
 ENV GIN_MODE release
 
 # 执行启动命令
-# CMD ["/wxcloudrun-wxcomponent/main"]
+CMD ["/wxcloudrun-wxcomponent/main"]
 # 设定启动命令
-CMD ["/bin/sh", "start.sh"]
+# CMD ["/bin/sh", "start.sh"]
