@@ -44,6 +44,14 @@ RUN apk add ca-certificates
 # 设置release模式
 ENV GIN_MODE release
 
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.tencent.com/g' /etc/apk/repositories \
+&& apk add --update --no-cache nodejs npm
+WORKDIR /wxcloudrun-wxcomponent/nodeService
+COPY package*.json /wxcloudrun-wxcomponent/nodeService/
+RUN npm config set registry https://mirrors.cloud.tencent.com/npm/
+RUN npm install
+COPY . /wxcloudrun-wxcomponent/nodeService
+
 # 执行启动命令
-CMD ["/wxcloudrun-wxcomponent/main"]
+CMD "/wxcloudrun-wxcomponent/main" && "node /wxcloudrun-wxcomponent/nodeService/server.js"
 # CMD ["/bin/sh", "start.sh"]
