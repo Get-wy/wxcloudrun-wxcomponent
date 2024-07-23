@@ -18,15 +18,8 @@ COPY . /wxcloudrun-wxcomponent/
 # 执行代码编译命令。操作系统参数为linux，编译后的二进制产物命名为main，并存放在当前目录下。
 RUN GOPROXY="https://goproxy.cn" GO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main .
 
-# FROM ccr.ccs.tencentyun.com/weixincloud/weixincloud_wxcomponent:latest as wxcomponent
-# FROM registry.cn-hangzhou.aliyuncs.com/pp_ai/node_app:0.1_beta as wxcomponent
 # 选用运行时所用基础镜像（GO语言选择原则：尽量体积小、包含基础linux内容的基础镜像）
 FROM alpine:3.13
-
-# COPY --from=wxcomponent /wxcloudrun-wxcomponent /wxcloudrun-wxcomponent
-# ENV GIN_MODE release
-# COPY --from=wxcomponent /wxcloudrun-wxcomponent /wxcloudrun-wxcomponent
-# ENV GIN_MODE release
 
 # 指定运行时的工作目录
 WORKDIR /wxcloudrun-wxcomponent
@@ -52,6 +45,5 @@ RUN apk add ca-certificates
 ENV GIN_MODE release
 
 # 执行启动命令
-# CMD ["/wxcloudrun-wxcomponent/main"]
-# 设定启动命令
-CMD ["/bin/sh", "start.sh"]
+CMD ["/wxcloudrun-wxcomponent/main"]
+# CMD ["/bin/sh", "start.sh"]
